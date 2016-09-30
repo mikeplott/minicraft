@@ -18,7 +18,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	TextureRegion right;
 	TextureRegion left;
 	boolean goRight;
-	boolean goUp;
+	boolean goUp = true;
 
 	static final int WIDTH = 16;
 	static final int HEIGHT = 16;
@@ -48,8 +48,47 @@ public class MyGdxGame extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		TextureRegion player;
 
+
 		batch.begin();
-		batch.draw(player, x, y, DRAW_WIDTH, DRAW_HEIGHT);
+		if (goRight) {
+			player = right;
+			batch.draw(player, x, y, DRAW_WIDTH, DRAW_HEIGHT);
+		}
+		else {
+			player = left;
+			batch.draw(player, x + DRAW_WIDTH, y, DRAW_WIDTH * -1, DRAW_HEIGHT);
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+			player = down;
+			batch.draw(player, x, y, DRAW_WIDTH, DRAW_HEIGHT);
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+			player = up;
+			batch.draw(player, x, y, DRAW_WIDTH, DRAW_HEIGHT);
+		}
+
+
+//		if (goUp) {
+//			player = up;
+//			batch.draw(player, x, y, DRAW_WIDTH, DRAW_HEIGHT);
+//		}
+//		else if (!goUp) {
+//			player = down;
+//			batch.draw(player, x, y, DRAW_WIDTH, DRAW_HEIGHT * -1);
+//		}
+//		else if (goRight) {
+//			player = right;
+//			batch.draw(player, x, y, DRAW_WIDTH, DRAW_HEIGHT);
+//		}
+//		else if (!goRight) {
+//			player = left;
+//			batch.draw(player, x, y, DRAW_WIDTH * -1, DRAW_HEIGHT);
+//		}
+//		else {
+//			player = right;
+//			batch.draw(player, x, y, DRAW_WIDTH, DRAW_HEIGHT);
+//		}
+		//batch.draw(player, x, y, DRAW_WIDTH, DRAW_HEIGHT);
 		batch.end();
 	}
 	
@@ -62,6 +101,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	public void movement() {
 		if (Gdx.input.isKeyPressed(Input.Keys.W)) {
 			yv = MAX_VELOCITY * 4;
+
 		}
 		else if (Gdx.input.isKeyPressed(Input.Keys.S)) {
 			yv = MAX_VELOCITY * -4;
@@ -72,7 +112,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		}
 		else if(Gdx.input.isKeyPressed(Input.Keys.D)) {
 			xv = MAX_VELOCITY * 4;
-			goRight = true;
+
 		}
 
 		x += xv * Gdx.graphics.getDeltaTime();
