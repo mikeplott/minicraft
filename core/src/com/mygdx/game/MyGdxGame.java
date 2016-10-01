@@ -45,8 +45,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	static final int DRAW_HEIGHT = HEIGHT * 3;
 	static final float MAX_VELOCITY = 100f;
 	static final float FRICTION = 0.8f;
-	//static final float MAX_WIDTH = Gdx.graphics.getWidth();
-	//static final float MAX_HEIGHT = Gdx.graphics.getHeight();
+
 
 
 
@@ -57,7 +56,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		img = new Texture("tiles.png");
 		Texture tiles = new Texture("tiles.png");
 		TextureRegion[][] grid = TextureRegion.split(tiles, WIDTH, HEIGHT);
-		TextureRegion[][] grassGrid = TextureRegion.split(tiles, 8, 8);
+		TextureRegion[][] grassGrid = TextureRegion.split(tiles, 30, 8);
 		grass = grassGrid[0][0];
 		down = grid[6][0];
 		up = grid[6][1];
@@ -79,17 +78,11 @@ public class MyGdxGame extends ApplicationAdapter {
 		totalTime += Gdx.graphics.getDeltaTime();
 		movement();
 		TextureRegion player;
+
 		Gdx.gl.glClearColor(0, 1, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-//		for (int i = 0; i < maxWidth; i++) {
-//			bgX = i;
-//		}
-//		for (int j = 0; j < madHeight; j++) {
-//			bgY = j;
-//		}
-		//batch.
-		//batch.draw(grass, bgX, bgY, DRAW_WIDTH * 2, DRAW_HEIGHT);
+		renderBackground();
 		if (goRight && xv == 0) {
 			player = right;
 			batch.draw(player, x, y, DRAW_WIDTH, DRAW_HEIGHT);
@@ -212,12 +205,38 @@ public class MyGdxGame extends ApplicationAdapter {
 		}
 		return velocity;
 	}
+
+	public void renderBackground() {
+		batch.draw(grass, 0, 0, DRAW_WIDTH * 5, DRAW_HEIGHT * 2);
+		batch.draw(grass, 0, 95, DRAW_WIDTH * 5, DRAW_HEIGHT * 2);
+		batch.draw(grass, 0, 190, DRAW_WIDTH * 5, DRAW_HEIGHT * 2);
+		batch.draw(grass, 0, 275, DRAW_WIDTH * 5, DRAW_HEIGHT * 2);
+		batch.draw(grass, 0, 360, DRAW_WIDTH * 5, DRAW_HEIGHT * 3);
+		batch.draw(grass, 240, 0, DRAW_WIDTH * 5, DRAW_HEIGHT * 2);
+		batch.draw(grass, 240, 95, DRAW_WIDTH * 5, DRAW_HEIGHT * 2);
+		batch.draw(grass, 240, 190, DRAW_WIDTH * 5, DRAW_HEIGHT * 2);
+		batch.draw(grass, 240, 275, DRAW_WIDTH * 5, DRAW_HEIGHT * 2);
+		batch.draw(grass, 240, 360, DRAW_WIDTH * 5, DRAW_HEIGHT * 3);
+		batch.draw(grass, 400, 0, DRAW_WIDTH * 5, DRAW_HEIGHT * 2);
+		batch.draw(grass, 480, 95, DRAW_WIDTH * 5, DRAW_HEIGHT * 2);
+		batch.draw(grass, 480, 190, DRAW_WIDTH * 5, DRAW_HEIGHT * 2);
+		batch.draw(grass, 480, 275, DRAW_WIDTH * 5, DRAW_HEIGHT * 2);
+		batch.draw(grass, 480, 360, DRAW_WIDTH * 5, DRAW_HEIGHT * 3);
+	}
 }
 
 
 
 
-
+//		for (int i = 0; i < maxWidth && i < madHeight; i++) {
+//			bgX = i;
+//			bgY = i;
+//		}
+//		for (int j = 0; j < madHeight; j++) {
+//			bgY += 8;
+//		}
+//batch.
+//batch.draw(grass, bgX, bgY, DRAW_WIDTH * 2, DRAW_HEIGHT);
 // test code from http://www.aurelienribon.com/blog/2012/06/tutorial-animated-grass-using-libgdx/
 //trying to draw grass using the sprite across the screen.
 //		float screenW = Gdx.graphics.getWidth();
